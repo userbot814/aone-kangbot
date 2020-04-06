@@ -122,12 +122,15 @@ async def instagram_dl(igdl):
 
 
     except ValueError:
-        await igdl.delete()
-        await igdl.reply("**User Not Found**\nPlease enter correct username")
+        await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
         return
+    except RuntimeError:
+        await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
+        return
+
 
 CMD_HELP.update({
     "instagram":
     ".ig <username>\
-\nUsage: Downloads 10 pictures from account."
+\nUsage: Downloads 10 pictures from Instagram account."
 })
