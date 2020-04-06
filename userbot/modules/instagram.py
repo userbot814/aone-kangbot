@@ -127,6 +127,6 @@ async def instagram_dl(igdl):
 
 CMD_HELP.update({
     "instagram":
-    ".igdl <username>\
+    ".ig <username>\
 \nUsage: Downloads 10 pictures from account."
 })
