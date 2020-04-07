@@ -77,16 +77,21 @@ def time_formatter(milliseconds: int) -> str:
 @register(outgoing=True, pattern=r"^.ig(?: |$)(.*)")
 async def instagram_dl(igdl):
     """ To downloading photos from instagram account """
-    try:
         uname = igdl.pattern_match.group(1)
         input_str = TEMP_DOWNLOAD_DIRECTORY
-
         if not os.path.exists(input_str):
             os.makedirs(input_str)
         else:
-            await igdl.edit(f"`Getting info.....`")
-            looter = ProfileLooter(f"{uname}")
-            looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
+            try:
+                await igdl.edit(f"`Getting info.....`")
+                looter = ProfileLooter(f"{uname}")
+                looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
+            except ValueError:
+                await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
+                return
+            except RuntimeError:
+                await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
+                return
             await igdl.edit("Processing ...")
             lst_of_files = []
             for r, d, f in os.walk(input_str):
@@ -122,13 +127,6 @@ async def instagram_dl(igdl):
                                         single_file)))
                             os.remove(single_file)
 
-
-    except ValueError:
-        await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
-        return
-    except RuntimeError:
-        await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
-        return
 
 
 CMD_HELP.update({
