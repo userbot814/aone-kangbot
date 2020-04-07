@@ -10,6 +10,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
 #
 # Installing Packages
 #
+Run Apk Add --update python
 RUN apk add --no-cache=true --update \
     coreutils \
     bash \
@@ -61,7 +62,6 @@ RUN apk add --no-cache=true --update \
     freetype-dev
 
 
-RUN curl https://cli-assets.heroku.com/install.sh | sh
 
 RUN python3 -m ensurepip \
     && pip3 install --upgrade pip setuptools \
