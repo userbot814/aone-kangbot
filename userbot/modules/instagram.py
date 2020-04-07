@@ -79,14 +79,14 @@ async def instagram_dl(igdl):
     """ To downloading photos from instagram account """
     try:
         uname = igdl.pattern_match.group(1)
-        await igdl.edit(f"`Getting info.....`")
-        looter = ProfileLooter(f"{uname}")
-        looter.download("tmp", media_count=10)
         input_str = "tmp"
 
         if not os.path.exists(input_str):
             os.makedirs(input_str)
         else:
+            await igdl.edit(f"`Getting info.....`")
+            looter = ProfileLooter(f"{uname}")
+            looter.download("tmp", media_count=10)
             await igdl.edit("Processing ...")
             lst_of_files = []
             for r, d, f in os.walk(input_str):
