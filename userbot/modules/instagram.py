@@ -77,11 +77,11 @@ def time_formatter(milliseconds: int) -> str:
 @register(outgoing=True, pattern=r"^.ig(?:|$)(.*)")
 async def instagram_dl(igdl):
     """ To downloading photos from instagram account """
-     message = igdl.pattern_match.group(1)
+     uname = igdl.pattern_match.group(1)
      input_str = TEMP_DOWNLOAD_DIRECTORY
           if not os.path.exists(input_str):
              os.makedirs(input_str)
-        else:
+          else:
             try:
                 await igdl.edit(f"`Getting info.....`")
                 looter = ProfileLooter(f"{uname}")
