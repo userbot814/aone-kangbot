@@ -10,7 +10,6 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
 #
 # Installing Packages
 #
-Run apk add --update python
 RUN apk add --no-cache=true --update \
     coreutils \
     bash \
@@ -43,7 +42,6 @@ RUN apk add --no-cache=true --update \
     pv \
     jq \
     wget \
-    python \
     python-dev \
     python3 \
     python3-dev \
