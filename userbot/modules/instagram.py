@@ -84,7 +84,9 @@ async def instagram_dl(igdl):
         looter.download("tmp", media_count=10)
         input_str = "tmp"
 
-        if os.path.exists(input_str):
+        if not os.path.exists(input_str):
+            os.makedirs(input_str)
+        else:
             await igdl.edit("Processing ...")
             lst_of_files = []
             for r, d, f in os.walk(input_str):
