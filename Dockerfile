@@ -10,7 +10,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
 #
 # Installing Packages
 #
-Run Apk Add --update python
+Run apk add --update python
 RUN apk add --no-cache=true --update \
     coreutils \
     bash \
