@@ -74,7 +74,7 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-@register(outgoing=True, pattern=r"^.ig(?:|$)(.*)")
+@register(outgoing=True, pattern=r"^.ig(?: |$)(.*)")
 async def instagram_dl(igdl):
     """ To downloading photos from instagram account """
      uname = igdl.pattern_match.group(1)
