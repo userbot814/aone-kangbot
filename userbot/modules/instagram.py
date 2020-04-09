@@ -130,9 +130,8 @@ try:
                             os.remove(single_file)
 
 
-
 CMD_HELP.update({
-    "instagram":
-    ".ig <username>\
-\nUsage: Downloads 10 pictures from Instagram account."
-})
+        "Instagram": 
+        ".ig (username) \
+          \nDownloads 10 pictures from Instagram account."
+    })
