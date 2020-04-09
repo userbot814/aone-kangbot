@@ -128,7 +128,7 @@ try:
                                     progress(d, t, igdl, c_time, "Uploading...",
                                         single_file)))
                             os.remove(single_file)
-                            else:
+                         else:
                             return 
 
                             
