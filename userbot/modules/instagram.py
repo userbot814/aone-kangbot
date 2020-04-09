@@ -14,7 +14,7 @@ import math
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from telethon.tl.types import DocumentAttributeVideo
-from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, TEMP_DOWNLOAD_DIRECTORY, LOGS
+from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, TMP_DOWNLOAD_DIRECTORY, LOGS
 from userbot.events import register
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
@@ -78,13 +78,13 @@ def time_formatter(milliseconds: int) -> str:
 async def instagram_dl(igdl):
     """ To downloading photos from instagram account """
     uname = igdl.pattern_match.group(1)
-    input_str = TEMP_DOWNLOAD_DIRECTORY
+    input_str = TMP_DOWNLOAD_DIRECTORY
     if not os.path.exists(input_str):
         os.makedirs(input_str)
     try:
         await igdl.edit(f"`Getting info.....`")
         looter = ProfileLooter(f"{uname}")
-        looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
+        looter.download(TMP_DOWNLOAD_DIRECTORY, media_count=5)
 
     except ValueError:
         await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
