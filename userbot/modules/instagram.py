@@ -78,7 +78,8 @@ def time_formatter(milliseconds: int) -> str:
 async def instagram_dl(igdl):
     """ To downloading photos from instagram account """
     uname = igdl.pattern_match.group(1)
-    if not os.path.exists(TEMP_DOWNLOAD_DIRECTORY):
+    input_str = TEMP_DOWNLOAD_DIRECTORY
+    if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
     try:
         await igdl.edit(f"`Getting info.....`")
