@@ -15,7 +15,7 @@ from traceback import format_exc
 
 from telethon import events
 
-from userbot import LOGSPAMMER, BOTLOG, BOTLOG_CHATID, bot
+from userbot import LOGS, LOGSPAMMER, BOTLOG, BOTLOG_CHATID, bot
 
 
 def register(**args):
@@ -66,9 +66,10 @@ def register(**args):
             if groups_only and not check.is_group:
                 await check.respond("`I don't think this is a group.`")
                 return
-
             if check.via_bot_id and not insecure:
-                return
+                if check.out:
+                    LOGS.info("WARNING: Potentially mallicious inline bot found! [Bot ID: {check.via_bot_id}]")
+                    return
 
             try:
                 await func(check)
@@ -91,17 +92,16 @@ def register(**args):
                 if not disable_errors:
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
-                    text = "**USERBOT ERROR REPORT**\n"
-                    link = "[Userbot Indo Support](https://t.me/userbotindo)"
+                    text = "**AONE-KANGBOT ERROR REPORT**\n"
                     text += "If you want to, you can report it"
-                    text += f". Head and forward this message to {link}.\n"
+                    text += f"- just forward this message to @azrim89 or @ThisIsTag.\n"
                     text += "Nothing is logged except the fact of error and date\n"
 
                     ftext = "========== DISCLAIMER =========="
                     ftext += "\nThis file uploaded ONLY here,"
                     ftext += "\nwe logged only fact of error and date,"
                     ftext += "\nwe respect your privacy,"
-                    ftext += "\nyou may not report this error if you've"
+                    ftext += "\nyou may not report this error if you want "
                     ftext += "\nany confidential data here, no one will see your data\n"
                     ftext += "================================\n\n"
                     ftext += "--------BEGIN USERBOT TRACEBACK LOG--------\n"
@@ -134,8 +134,7 @@ def register(**args):
                     file.close()
 
                     if LOGSPAMMER:
-                        await check.client.respond(
-                            "`Sorry, my userbot has crashed.\
+                        await check.client.respond("`Sorry, my userbot has crashed.\
                         \nThe error logs are stored in the userbot's log chat.`"
                         )
 
