@@ -95,12 +95,12 @@ try:
             await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
             return
             await igdl.edit("Processing ...")
-              lst_of_files = []
-              for r, d, f in os.walk(input_str):
-                for file in f:
-                    lst_of_files.append(os.path.join(r, file))
-                for file in d:
-                    lst_of_files.append(os.path.join(r, file))
+                lst_of_files = []
+                for r, d, f in os.walk(input_str):
+                  for file in f:
+                      lst_of_files.append(os.path.join(r, file))
+                  for file in d:
+                      lst_of_files.append(os.path.join(r, file))
             LOGS.info(lst_of_files)
             uploaded = 0
             countf = "{}".format(len(lst_of_files))
