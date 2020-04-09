@@ -89,10 +89,10 @@ async def instagram_dl(igdl):
             looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
         except ValueError:
               await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
-               return
+              return
         except RuntimeError:
             await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
-                return
+            return
             await igdl.edit("Processing ...")
             lst_of_files = []
             for r, d, f in os.walk(input_str):
