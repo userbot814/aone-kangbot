@@ -82,8 +82,8 @@ async def instagram_dl(igdl):
       
     if not os.path.exists(input_str):
            os.makedirs(input_str)
-       else:
-          try:
+    else:
+        try:
                 await igdl.edit(f"`Getting info.....`")
                 looter = ProfileLooter(f"{uname}")
                 looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
