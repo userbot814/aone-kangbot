@@ -81,12 +81,12 @@ async def instagram_dl(igdl):
     """ To downloading photos from instagram account """
     uname = igdl.pattern_match.group(1)
     input_str = TEMP_DOWNLOAD_DIRECTORY
-    if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
+    if not os.path.isdir(input_str):
+        os.makedirs(input_str)
     try:
         await igdl.edit(f"`Getting info.....`")
         looter = ProfileLooter(f"{uname}")
-        looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
+        looter.download(input_str, media_count=5)
 
     except ValueError:
         await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
