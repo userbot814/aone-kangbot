@@ -132,6 +132,6 @@ try:
 
 CMD_HELP.update({
         "Instagram": 
-        ".ig (username) \
+        ".ig (username) 
           \nDownloads 10 pictures from Instagram account."
     })
