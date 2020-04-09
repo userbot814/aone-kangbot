@@ -93,10 +93,9 @@ async def instagram_dl(igdl):
         except RuntimeError:
             await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
             return
-            
-           await igdl.edit("Processing ...")
-            lst_of_files = []
-            for r, d, f in os.walk(input_str):
+             await igdl.edit("Processing ...")
+             lst_of_files = []
+             for r, d, f in os.walk(input_str):
                 for file in f:
                     lst_of_files.append(os.path.join(r, file))
                 for file in d:
