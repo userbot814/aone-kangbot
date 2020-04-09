@@ -5,6 +5,7 @@
 # you may not use this file except in compliance with the License.
 
 from instalooter.looters import ProfileLooter
+from instalooter.looters import PostLooter
 import os
 import time
 import asyncio
@@ -74,28 +75,29 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-@register(outgoing=True, pattern=r"^.ig(?: |$)(.*)")
-async def instagram_dl(igdl):
+@register(outgoing=True, pattern=r"^.igacc(?: |$)(.*)")
+async def profile(igdl):
     """ To downloading photos from instagram account """
     uname = igdl.pattern_match.group(1)
-    if not os.path.exists(TEMP_DOWNLOAD_DIRECTORY):
-        os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
+    folder = TEMP_DOWNLOAD_DIRECTORY
+    if not os.path.exists(folder):
+        os.makedirs(folder)
     try:
         await igdl.edit(f"`Getting info.....`")
-        looter = ProfileLooter(f"{uname}")
-        looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
+        looter = ProfileLooter(uname)
+        looter.download(folder, media_count=5)
 
     except ValueError:
-        await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
-        return
-        
-    except RuntimeError:
-        await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
+        await igdl.edit(f"**Account `{uname}` Not Found.**\nPlease enter correct username.")
         return
 
-    await igdl.edit("Processing ...")
+    except RuntimeError:
+        await igdl.edit(f"**Can't Catch Media.**\nAccount `{uname}` is Private.")
+        return
+
+    await igdl.edit("`Processing ...`")
     lst_of_files = []
-    for r, d, f in os.walk(input_str):
+    for r, d, f in os.walk(folder):
         for file in f:
             lst_of_files.append(os.path.join(r, file))
         for file in d:
@@ -105,7 +107,8 @@ async def instagram_dl(igdl):
     countf = "{}".format(len(lst_of_files))
     count = int(countf)
     if count == 0:
-        await igdl.edit("**No Media Found**\nSorry this account doesn't have any content")
+        await igdl.edit("**No Media Found.**\nSorry this account doesn't have any content.")
+        return
     else:
         await igdl.edit(
             "Found {} files. Uploading will start soon. Please wait!".format(
@@ -125,6 +128,62 @@ async def instagram_dl(igdl):
                         progress_callback=lambda d, t: asyncio.get_event_loop(
                         ).create_task(
                             progress(d, t, igdl, c_time, "Uploading...",
+                                single_file)))
+                    os.remove(single_file)
+
+
+@register(outgoing=True, pattern=r"^.igpost(?: |$)(.*)")
+async def post_link(post):
+    link = post.pattern_match.group(1)
+    folder = TEMP_DOWNLOAD_DIRECTORY
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    try:
+        await post.edit(f"`Getting info.....`")
+        looter = PostLooter(f"{link}")
+        looter.download(folder)
+
+    except ValueError:
+        await post.edit(f"**Invalid Post Code**")
+        return
+
+    except RuntimeError:
+        await post.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
+        return
+
+    await post.edit("Processing ...")
+    lst_of_files = []
+    for r, d, f in os.walk(folder):
+        for file in f:
+            lst_of_files.append(os.path.join(r, file))
+        for file in d:
+            lst_of_files.append(os.path.join(r, file))
+    LOGS.info(lst_of_files)
+    uploaded = 0
+    countf = "{}".format(len(lst_of_files))
+    count = int(countf)
+    if count == 0:
+        await post.edit("**No Media Found**\nSorry this account doesn't have any content")
+        return
+    else:
+        await post.edit(
+            "Found {} files. Uploading will start soon. Please wait!".format(
+                len(lst_of_files)))
+        for single_file in lst_of_files:
+            if os.path.exists(single_file):
+                # https://stackoverflow.com/a/678242/4723940
+                caption_rts = os.path.basename(single_file)
+                c_time = time.time()
+                if not caption_rts.lower().endswith(".mp4"):
+                    await post.client.send_file(
+                        post.chat_id,
+                        single_file,
+                        caption=f"[{link}](https://instagram.com/{link})",
+                        force_document=True,
+                        allow_cache=False,
+                        progress_callback=lambda d, t: asyncio.get_event_loop(
+                        ).create_task(
+                            progress(d, t, post, c_time, "Uploading...",
                                 single_file)))
                     os.remove(single_file)
 
