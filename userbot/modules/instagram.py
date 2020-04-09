@@ -84,14 +84,14 @@ async def instagram_dl(igdl):
            os.makedirs(input_str)
     else:
         try:
-                await igdl.edit(f"`Getting info.....`")
-                looter = ProfileLooter(f"{uname}")
-                looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
-            except ValueError:
-                await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
-                return
-            except RuntimeError:
-                await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
+            await igdl.edit(f"`Getting info.....`")
+            looter = ProfileLooter(f"{uname}")
+            looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
+        except ValueError:
+              await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
+               return
+        except RuntimeError:
+            await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
                 return
             await igdl.edit("Processing ...")
             lst_of_files = []
