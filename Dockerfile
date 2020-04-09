@@ -42,7 +42,6 @@ RUN apk add --no-cache=true --update \
     pv \
     jq \
     wget \
-    python-dev \
     python3 \
     python3-dev \
     readline-dev \
