@@ -122,7 +122,7 @@
       "description": "Report spambots to @admins in groups after they join, just in case when you don't have admin powers to kick that shit yourself.",
       "value": "False"
     },
-    "TMP_DOWNLOAD_DIRECTORY": {
+    "TEMP_DOWNLOAD_DIRECTORY": {
       "description": "Download location for many modules (GDrive, .download etc..)",
       "value": "./downloads/"
     },
