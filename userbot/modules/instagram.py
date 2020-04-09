@@ -127,4 +127,4 @@ try:
                                 ).create_task(
                                     progress(d, t, igdl, c_time, "Uploading...",
                                         single_file)))
-                            os.remove(single_file)
+                            return os.remove(single_file)
