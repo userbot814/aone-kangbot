@@ -48,3 +48,4 @@ telegraph
 PyGithub
 python-dateutil
 instalooter
+ffmpy
