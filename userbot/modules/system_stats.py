@@ -124,15 +124,21 @@ async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     await alive.edit("`"
                      f"••••••••••••••••••••••••••••••• \n"
-                     f"Aone-kangbot is Running, enjoy! \n"
+                     f"  Uhm ohayou~~, ghosujin-sama! \n"
+                     f"  (っ•́｡•́)♪♬ ~, all is well \n\n"
                      f"=============================== \n"
-                     f"Telethon version: {version.__version__} \n"
-                     f"Python: {python_version()} \n"
+                     f"versi Telethon: {version.__version__} \n"
+                     f"versi Python: {python_version()} \n"
+                     f"versi Devices: Ginkgo \n"
+                     F"versi OS: Android Q (10) \n"
                      f"=============================== \n\n"
-                     f"User : {DEFAULTUSER} \n"
+                     f"My ghosujinsama : {DEFAULTUSER} \n"
                      f"••••••••••••••••••••••••••••••• \n"
+                     f"Notes: \n"
+                     f"Semua modul telah aktiv, semoga \n"
+                     f"hari anda menyenangkan hari ini \n"
                      " \n\n"
-                     "`")    
+                     "`")   
 
 
 
